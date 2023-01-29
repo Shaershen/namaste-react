@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import Header from './components/Header'
 import Body from './components/Body'
@@ -9,6 +9,7 @@ import RestaurantMenu from './components/RestaurantMenu'
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import Profile from './components/Profile'
 import Shimmer from './components/Shimmer'
+import UserContext from './utils/UserContext'
 
 // Chunking
 // Code splitting
@@ -18,15 +19,19 @@ import Shimmer from './components/Shimmer'
 // dynamic import
 
 const Instamart = lazy(() => import('./components/Instamart'))
-const About = lazy(() => import('./components/About'))
 
 const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: 'Dummy',
+    email: 'aseqw@wqewe.ca',
+  })
+
   return (
-    <>
+    <UserContext.Provider value={{ user: user, setUser: setUser }}>
       <Header />
       <Outlet />
       <Footer />
-    </>
+    </UserContext.Provider>
   )
 }
 
