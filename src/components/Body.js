@@ -1,10 +1,8 @@
-import { restaurantList } from '../constants'
 import RestaurantCard from './RestaurantCard'
 import { useState, useEffect, useContext } from 'react'
 import Shimmer from './Shimmer'
 import { Link } from 'react-router-dom'
-import filterData from '../utils/helper'
-import useOnline from '../utils/useOnline'
+import { filterData } from '../utils/helper'
 import UserContext from '../utils/UserContext'
 
 const Body = () => {
@@ -26,20 +24,13 @@ const Body = () => {
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards)
   }
 
-  // const isOnline = useOnline()
-
-  // if (!isOnline) {
-  //   return <h1>Offline, please check your internet connection!</h1>
-  // }
-
-  //  early return if not render
   if (!allRestaurants) return null
 
   return allRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <>
-      <div className=" p-5 bg-pink-50 my-5">
+      <div className="p-5 bg-pink-50 my-5">
         <input
           type="text"
           className="focus:bg-green-50 p-2 m-2"
@@ -54,6 +45,7 @@ const Body = () => {
           onClick={() => {
             // filter the data
             const data = filterData(searchText, allRestaurants)
+
             // update the state - restaurants
             setFilteredRestaurants(data)
           }}
@@ -64,8 +56,17 @@ const Body = () => {
           value={user.name}
           onChange={(e) =>
             setUser({
+              ...user,
               name: e.target.value,
-              email: 'new Email',
+            })
+          }
+        ></input>
+        <input
+          value={user.email}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              email: e.target.value,
             })
           }
         ></input>

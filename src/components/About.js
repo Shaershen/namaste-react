@@ -32,7 +32,11 @@ class About extends React.Component {
         <h1>About us page</h1>
 
         <UserContext.Consumer>
-          {({ user }) => <h4 className="font-bold p-10">{user.name}</h4>}
+          {({ user }) => (
+            <h4 className="font-bold p-10">
+              {user.name}- {user.email}
+            </h4>
+          )}
         </UserContext.Consumer>
 
         <p>This is namaste react live course</p>
