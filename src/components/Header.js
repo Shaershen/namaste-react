@@ -9,6 +9,7 @@ import store from '../utils/store'
 const Title = () => (
   <a href="/">
     <img
+      data-testid="logo"
       className="h-28 pl-2"
       alt="logo"
       src={Logo}
@@ -43,11 +44,16 @@ const Header = () => {
             <li className="px-2">Instamart</li>
           </Link>
           <Link to="/cart">
-            <li className="px-2">Cart - {cartItems.length} items</li>
+            <li
+              className="px-2"
+              data-testid="cart"
+            >
+              Cart - {cartItems.length} items
+            </li>
           </Link>
         </ul>
       </div>
-      <h1>{isOnline ? 'online' : 'offline'}</h1>
+      <h1 data-testid="online-status">{isOnline ? 'online' : 'offline'}</h1>
       <span className="m-2 p-2 font-bold text-red-500">{user.name}</span>
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>Login</button>
